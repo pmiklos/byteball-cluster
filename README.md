@@ -15,20 +15,26 @@ require('byteballcore/wallet.js');
 
 const coordinator = cluster.Coordinator;
 
+function sayHello() {
+    coordinator.sendAll({
+        method: "hello",
+        name: "Coordinator"
+    }, (err, response) => {
+        if (err) return console.error(err.message);
+        console.log(response.result);
+    });
+}
+
 eventBus.on('text', coordinator.listen);
 
-coordinator.sendAll({
-    method: "hello",
-    name: "Coordinator"
-}, (err, response) => {
-    if (err) return console.error(err.message);
-    console.log(response.result);
-});
+eventBus.once("headless_wallet_ready", function() {
+    setTimeout(sayHello, 10000); // let workers join, then say hello
+}
 ```
 
-# Worker
+## Worker
 
-The worker is a byteball chat bot that performs a task instructed by the coordinator.
+The worker is a byteball chat bot that performs a task instructed by the coordinator. The worker uses the pairing code of the coordinator to join the cluster.
 
 ```javascript
 const eventBus = require("byteballcore/event_bus.js");
