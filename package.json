@@ -1,0 +1,20 @@
+{
+  "name": "byteball-cluster",
+  "version": "1.0.0",
+  "description": "2nd layer Byteball chat bot communication protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "byteball",
+    "crypto",
+    "cluster"
+  ],
+  "author": "Peter Miklos",
+  "license": "MIT",
+  "dependencies": {
+    "byteballcore": "^0.2.90",
+    "uuid": "^3.3.2"
+  }
+}
